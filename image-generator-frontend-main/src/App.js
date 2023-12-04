@@ -9,7 +9,7 @@ const App = () => {
 
   const handleGenerateImage = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/generate_image', {
+      const response = await axios.post('http://0.0.0.0:8000/generate_image', {
         prompt,
         num_images: numImages,
       });
