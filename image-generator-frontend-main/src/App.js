@@ -5,7 +5,7 @@ import axios from 'axios';
 const App = () => {
   const [prompt, setPrompt] = useState('');
   const [numImages, setNumImages] = useState(1);
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageData, setImageData] = useState('');
 
   const handleGenerateImage = async () => {
     try {
@@ -14,7 +14,7 @@ const App = () => {
         num_images: numImages,
       });
 
-      setImageUrl(response.data.image_url);
+      setImageData(response.data.image_data);
     } catch (error) {
       console.error('Error generating image:', error);
     }
@@ -32,10 +32,10 @@ const App = () => {
         <input type="number" value={numImages} onChange={(e) => setNumImages(e.target.value)} />
       </div>
       <button onClick={handleGenerateImage}>Generate Image</button>
-      {imageUrl && (
+      {imageData && (
         <div>
           <h2>Generated Image</h2>
-          <img src={imageUrl} alt="Generated" style={{ maxWidth: '100%' }} />
+          <img src={`data:image/jpeg;base64,${imageData}`} alt="Generated" style={{ maxWidth: '100%' }} />
         </div>
       )}
     </div>
