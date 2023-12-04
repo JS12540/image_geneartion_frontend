@@ -9,7 +9,7 @@ const App = () => {
 
   const handleGenerateImage = async () => {
     try {
-      const response = await axios.post('http://0.0.0.0:8000/generate_image', {
+      const response = await axios.post('https://pd-aakas-image-gene-d798d0ab2ce34621ab53775282a56c4f.community.saturnenterprise.io/generate_image', {
         prompt,
         num_images: numImages,
       });
