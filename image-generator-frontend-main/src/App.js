@@ -10,13 +10,22 @@ const App = () => {
   const handleGenerateImage = async () => {
     try {
       const response = await axios.post('https://pd-aakas-image-gene-d798d0ab2ce34621ab53775282a56c4f.community.saturnenterprise.io/generate_image', {
-        prompt,
+        prompt: prompt,
         num_images: numImages,
       });
-
+  
       setImageData(response.data.image_data);
     } catch (error) {
-      console.error('Error generating image:', error);
+      if (error.response) {
+        // The request was made, but the server responded with a status code that falls out of the range of 2xx
+        console.error('Error generating image. Server responded with:', error.response.data);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('Error generating image. No response received from the server.');
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error('Error generating image. Request setup error:', error.message);
+      }
     }
   };
 
